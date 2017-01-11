@@ -4,6 +4,7 @@
 参考文档：
 1. [http://blog.csdn.net/witsmakemen/article/details/28600127](http://blog.csdn.net/witsmakemen/article/details/28600127)
 2. [http://blog.csdn.net/witsmakemen/article/details/28600127](http://blog.csdn.net/cutesource/article/details/5904542)
+3. [http://www.cnblogs.com/ywl925/p/3925637.html](http://www.cnblogs.com/ywl925/p/3925637.html)
 ``
 
  这篇文章是基于自己学习jvm时做的一些总结，主要是为了给自己留笔记。内容主要来自博文，真实来源已不可考。其中加入了一些我自己的理解，文笔不好，但好在通俗。
@@ -72,6 +73,7 @@ jvm基本结构如下图：
 
 JVM自身的物理结构：
 ![jvm结构](https://raw.githubusercontent.com/chopinsun/study_java/master/241532375103105.jpg)
+<center style="font-size:14px;color:#999;">图2.2</center>
 
 从图中能看到JVM内存结构主要包括两个子系统和两个组件。两个子系统分别是Classloader子系统和Executionengine(执行引擎)子系统；两个组件分别是Runtimedataarea(运行时数据区域即内存空间)组件和Nativeinterface(本地接口)组件。
 
@@ -89,9 +91,9 @@ Nativeinterface组件：
 
 RuntimeDataArea组件：
 
-这就是我们常说的JVM的内存了。它主要分为五个部分——
+这就是我们常说的JVM的内存了（第三章详细解释）。它主要分为五个部分——
 
-1. Heap(堆)：一个Java虚拟实例中只存在一个堆空间
+1. Heap(堆)：一个Java虚拟实例中只存在一个堆空间。
 
 2. MethodArea(方法区域)：被装载的class的信息存储在Methodarea的内存中。当虚拟机装载某个类型时，它使用类装载器定位相应的class文件，然后读入这个class文件内容并把它传输到虚拟机中。
 
@@ -100,3 +102,9 @@ RuntimeDataArea组件：
 4. ProgramCounter(程序计数器)：每一个线程都有它自己的PC寄存器，也是该线程启动时创建的。PC寄存器的内容总是指向下一条将被执行指令的饿地址，这里的地址可以是一个本地指针，也可以是在方法区中相对应于该方法起始指令的偏移量。
 
 5. Nativemethodstack(本地方法栈)：保存native方法进入区域的地址
+
+## 三. gc及原理
+
+要谈gc，就先要谈JVM内存结构，所以我们再回头看下图2.2。
+
+重新详细的看一下内存结构
